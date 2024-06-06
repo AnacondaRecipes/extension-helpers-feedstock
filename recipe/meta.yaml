@@ -28,6 +28,10 @@ requirements:
 test:
   imports:
     - extension_helpers
+  requires:
+    - pip
+  commands:
+    - pip check
 
 about:
   home: https://github.com/astropy/extension-helpers
