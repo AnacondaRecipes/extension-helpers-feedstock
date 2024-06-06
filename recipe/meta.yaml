@@ -18,11 +18,12 @@ requirements:
   host:
     - python
     - pip
-    - setuptools
-    - setuptools_scm
+    - setuptools 43.0.0
+    - setuptools_scm 6.2
   run:
     - python
-    - setuptools
+    - setuptools >=40.2
+    - tomli >=1.0.0  # [py<311]
 
 test:
   imports:
