@@ -18,8 +18,8 @@ requirements:
   host:
     - python
     - pip
-    - setuptools 43.0.0
-    - setuptools_scm 6.2
+    - setuptools
+    - setuptools_scm
     - wheel
   run:
     - python
