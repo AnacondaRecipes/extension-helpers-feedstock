@@ -20,6 +20,7 @@ requirements:
     - pip
     - setuptools 43.0.0
     - setuptools_scm 6.2
+    - wheel
   run:
     - python
     - setuptools >=40.2
