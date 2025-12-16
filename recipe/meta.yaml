@@ -1,16 +1,16 @@
 {% set name = "extension-helpers" %}
-{% set version = "1.1.1" %}
+{% set version = "1.4.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: f95dd304a523d4ff6680d9504fa1d68a4dd03bf3bfbbe0ade4d927ed9e693f00
+  url: https://pypi.org/packages/source/e/extension-helpers/extension_helpers-1.4.0.tar.gz
+  sha256: 78d04185f196e3e0bc5fd8418ce298b014c46f7ac609f6a8c10bf70e8c978324
 
 build:
-  skip: True  # [py<38]
+  skip: true  # [py<310]
   number: 0
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
@@ -18,12 +18,12 @@ requirements:
   host:
     - python
     - pip
-    - setuptools
+    - setuptools >=43.0.0
     - setuptools_scm
-    - wheel
+    - setuptools-scm >=6.2
   run:
     - python
-    - setuptools >=40.2
+    - setuptools >=64
     - tomli >=1.0.0  # [py<311]
 
 test:
@@ -39,7 +39,7 @@ about:
   license: BSD-3-Clause
   license_family: BSD
   license_file: LICENSE
-  summary: 'Utilities for building and installing packages with compiled extensions'
+  summary: Utilities for building and installing packages with compiled extensions
   description: |
     "The extension-helpers package includes convenience helpers to assist
     with building Python packages with compiled C/Cython extensions."
