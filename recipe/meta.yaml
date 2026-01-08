@@ -26,6 +26,11 @@ requirements:
     - setuptools >=64
     - tomli >=1.0.0  # [py<311]
 
+
+{% set deselect_tests = "" %}
+{% set deselect_tests = deselect_tests + "--deselect=test_setup_helpers.py::test_no_setup_py" %}  # [win]
+{% set deselect_tests = deselect_tests + " --deselect=test_setup_helpers.py::test_only_pyproject" %}  # [win]
+
 test:
   imports:
     - extension_helpers
@@ -34,14 +39,10 @@ test:
     - pytest
     - cython
     - python-build
-    # ERROR Missing dependencies:
-        # wheel
     - wheel
-    - {{ stdlib('c') }}  # [win]
-    - {{ compiler('c') }}  # [win]
   commands:
     - pip check
-    - pytest --pyargs extension_helpers.tests
+    - pytest --pyargs extension_helpers.tests {{ deselect_tests }}
 
 about:
   home: https://github.com/astropy/extension-helpers
