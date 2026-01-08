@@ -37,6 +37,8 @@ test:
     # ERROR Missing dependencies:
         # wheel
     - wheel
+    - {{ stdlib('c') }}  # [win]
+    - {{ compiler('c') }}  # [win]
   commands:
     - pip check
     - pytest --pyargs extension_helpers.tests
