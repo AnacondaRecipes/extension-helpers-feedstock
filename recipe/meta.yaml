@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/e/extension-helpers/extension_helpers-1.4.0.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name|replace('-', '_') }}-{{ version }}.tar.gz
   sha256: 78d04185f196e3e0bc5fd8418ce298b014c46f7ac609f6a8c10bf70e8c978324
 
 build:
@@ -18,8 +18,8 @@ requirements:
   host:
     - python
     - pip
+    - wheel
     - setuptools >=43.0.0
-    - setuptools_scm
     - setuptools-scm >=6.2
   run:
     - python
@@ -31,8 +31,15 @@ test:
     - extension_helpers
   requires:
     - pip
+    - pytest
+    - cython
+    - python-build
+    # ERROR Missing dependencies:
+        # wheel
+    - wheel
   commands:
     - pip check
+    - pytest --pyargs extension_helpers.tests
 
 about:
   home: https://github.com/astropy/extension-helpers
@@ -43,7 +50,7 @@ about:
   description: |
     "The extension-helpers package includes convenience helpers to assist
     with building Python packages with compiled C/Cython extensions."
-  doc_url: https://extension-helpers.readthedocs.io/
+  doc_url: https://extension-helpers.readthedocs.io
   dev_url: https://github.com/astropy/extension-helpers
 
 extra:
