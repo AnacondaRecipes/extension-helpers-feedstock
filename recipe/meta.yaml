@@ -42,7 +42,6 @@ test:
     - wheel
   commands:
     - pip check
-    - set DISTUTILS_USE_SDK=1 # [win]
     - set CL=/MP1 # [win]
     - pytest -vv --pyargs extension_helpers.tests
 
