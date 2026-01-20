@@ -26,7 +26,8 @@ requirements:
     - setuptools >=64
     - tomli >=1.0.0  # [py<311]
 
-
+# Failing only on CI
+# E   ModuleNotFoundError: No module named 'helpers_test_package_55dba3dc_9338_4fd3_b3bb_bea1eb0a2405'
 {% set deselect_tests = "" %}
 {% set deselect_tests = deselect_tests + "--deselect=test_setup_helpers.py::test_no_setup_py" %}  # [win]
 {% set deselect_tests = deselect_tests + " --deselect=test_setup_helpers.py::test_only_pyproject" %}  # [win]
@@ -42,15 +43,14 @@ test:
     - wheel
   commands:
     - pip check
-    - set CL=/O2 /GL-  # [win]
-    - set LINK=/INCREMENTAL:NO /LTCG:OFF  # [win]
-    - pytest -vv --pyargs extension_helpers.tests
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+    - pytest -vv --pyargs extension_helpers.tests {{ deselect_tests }}
 
 about:
   home: https://github.com/astropy/extension-helpers
   license: BSD-3-Clause
   license_family: BSD
-  license_file: LICENSE
+  license_file: LICENSE.rst
   summary: Utilities for building and installing packages with compiled extensions
   description: |
     "The extension-helpers package includes convenience helpers to assist
