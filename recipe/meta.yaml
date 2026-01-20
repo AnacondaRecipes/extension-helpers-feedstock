@@ -42,7 +42,9 @@ test:
     - wheel
   commands:
     - pip check
-    - pytest --pyargs extension_helpers.tests {{ deselect_tests }}
+    - set DISTUTILS_USE_SDK=1 # [win]
+    - set CL=/MP1 # [win]
+    - pytest -vv --pyargs extension_helpers.tests
 
 about:
   home: https://github.com/astropy/extension-helpers
