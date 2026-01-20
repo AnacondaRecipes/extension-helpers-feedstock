@@ -42,7 +42,8 @@ test:
     - wheel
   commands:
     - pip check
-    - set CL=/MP1 # [win]
+    - set CL=/O2 /GL-  # [win]
+    - set LINK=/INCREMENTAL:NO /LTCG:OFF  # [win]
     - pytest -vv --pyargs extension_helpers.tests
 
 about:
