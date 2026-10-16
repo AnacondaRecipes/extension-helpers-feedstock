@@ -1,13 +1,18 @@
 {% set name = "extension-helpers" %}
-{% set version = "1.4.0" %}
+{% set version = "1.5.0" %}
+{% set deselect_tests = "" %}
+{% set deselect_tests = 'deselect_tests + "--deselect=test_setup_helpers.py::test_no_setup_py"' %}  # [win]
+{% set deselect_tests = 'deselect_tests + " --deselect=test_setup_helpers.py::test_only_pyproject"' %}  # [win]
 
+# Failing only on CI
+# E   ModuleNotFoundError: No module named 'helpers_test_package_55dba3dc_9338_4fd3_b3bb_bea1eb0a2405'
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name|replace('-', '_') }}-{{ version }}.tar.gz
-  sha256: 78d04185f196e3e0bc5fd8418ce298b014c46f7ac609f6a8c10bf70e8c978324
+  sha256: 8cd43cb148c679b7ee7d187745ca3528df3e6952a9b14bb606ec23ee6cedc0a3
 
 build:
   skip: true  # [py<310]
@@ -18,19 +23,12 @@ requirements:
   host:
     - python
     - pip
-    - wheel
-    - setuptools >=43.0.0
+    - setuptools >=77.0.1
     - setuptools-scm >=6.2
   run:
     - python
     - setuptools >=64
     - tomli >=1.0.0  # [py<311]
-
-# Failing only on CI
-# E   ModuleNotFoundError: No module named 'helpers_test_package_55dba3dc_9338_4fd3_b3bb_bea1eb0a2405'
-{% set deselect_tests = "" %}
-{% set deselect_tests = deselect_tests + "--deselect=test_setup_helpers.py::test_no_setup_py" %}  # [win]
-{% set deselect_tests = deselect_tests + " --deselect=test_setup_helpers.py::test_only_pyproject" %}  # [win]
 
 test:
   imports:
