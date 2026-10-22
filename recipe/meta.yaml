@@ -1,13 +1,13 @@
 {% set name = "extension-helpers" %}
-{% set version = "1.4.0" %}
+{% set version = "1.5.0" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name|replace('-', '_') }}-{{ version }}.tar.gz
-  sha256: 78d04185f196e3e0bc5fd8418ce298b014c46f7ac609f6a8c10bf70e8c978324
+  sha256: 8cd43cb148c679b7ee7d187745ca3528df3e6952a9b14bb606ec23ee6cedc0a3
 
 build:
   skip: true  # [py<310]
@@ -18,8 +18,7 @@ requirements:
   host:
     - python
     - pip
-    - wheel
-    - setuptools >=43.0.0
+    - setuptools >=77.0.1
     - setuptools-scm >=6.2
   run:
     - python
